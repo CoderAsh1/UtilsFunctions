@@ -126,3 +126,20 @@ export function formattedTime(dateString) {
     console.log(error);
   }
 }
+
+
+const handleDownload = (data) => {
+      data?.map((item) => {
+         fetch(item?.url).then(response => {
+            response.blob().then(blob => {
+                // Creating new object of PDF file
+                const fileURL = window.URL.createObjectURL(blob);
+                // Setting various property values
+                let alink = document.createElement('a');
+                alink.href = fileURL;
+                alink.download = 'document';
+                alink.click();
+            })
+        })
+      })
+    };
